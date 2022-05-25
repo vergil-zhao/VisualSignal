@@ -11,7 +11,6 @@ import SceneKit
 import ARKit
 
 
-
 class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
@@ -41,6 +40,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        guard ARWorldTrackingConfiguration.supportsSceneReconstruction(.meshWithClassification) else {
+            print("meshWithClassification isn't supported here.")
+            return
+        }
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
